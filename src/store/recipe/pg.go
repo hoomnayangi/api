@@ -13,8 +13,12 @@ func NewStore() Store {
 	return &recipePGStore{}
 }
 
-func (s recipePGStore) GetHighLight(c echo.Context, lat, long float64) (*model.Recipe, error) {
+func (s recipePGStore) GetFromIngredients(c echo.Context, ingredients []string) ([]*model.Recipe, error) {
 	tx := db.GetTxFromCtx(c)
-	var res model.Recipe
-	return &res, tx.Where("id = ?", id).First(&res).Error
+	var res []*model.Recipe
+	return res, tx.
+		Joins("inner join recipes_ingredients on recipes_ingredients.recipe_id = recipes.id").
+		Where("recipes_ingredients.ingredient_id in (?)", ingredients).
+		Find(&res).
+		Error
 }
