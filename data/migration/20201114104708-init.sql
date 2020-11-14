@@ -17,6 +17,7 @@ create table recipes (
 	deleted_at timestamp(6) with time zone,
 	name varchar(200) not null,
 	description text,
+	picture text,
 	steps jsonb
 );
 
