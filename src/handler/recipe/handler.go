@@ -10,9 +10,14 @@ import (
 
 // GetHighLightRecipes - get high light recipe for main page
 func GetHighLightRecipes(c echo.Context, lat, long float64) ([]*model.Recipe, error) {
-	// srv := server.GetServerCfg()
+	srv := server.GetServerCfg()
 
-	return nil, nil
+	res, err := srv.Store().Recipe.GetHighLight(c, lat, long)
+	if err != nil {
+		return nil, errors.Customize(err, 404, "recipe not found")
+	}
+
+	return res, nil
 }
 
 // GetFromIngredients - get recipe from provided ingredients
