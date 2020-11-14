@@ -22,4 +22,4 @@ init: remove-infras
 		sleep 1; \
 	done
 	sql-migrate up -config=dbconfig.yml -env="local"
-	# make seed-db-local
+	make seed-db-local

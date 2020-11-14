@@ -9,6 +9,7 @@ require (
 	github.com/jinzhu/now v1.1.1 // indirect
 	github.com/joho/godotenv v1.3.0
 	github.com/labstack/echo v3.3.10+incompatible
+	github.com/phuwn/lightning v0.0.0-20201017025427-5da4024f702d
 	github.com/phuwn/tools v1.0.3
 	golang.org/x/oauth2 v0.0.0-20201109201403-9fd604954f58
 	google.golang.org/api v0.35.0

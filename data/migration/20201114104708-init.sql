@@ -26,7 +26,9 @@ create table ingredients (
 	updated_at timestamp(6) with time zone,
 	deleted_at timestamp(6) with time zone,
 	name varchar(200) not null,
-	description text
+	description text,
+	picture text,
+	is_main boolean
 );
 
 create table recipes_ingredients (
