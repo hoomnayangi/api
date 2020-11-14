@@ -8,3 +8,10 @@ type Ingredient struct {
 	Description string `json:"description"`
 	Picture     string `json:"picture"`
 }
+
+// IngredientResponse - JSON response model
+type IngredientResponse struct {
+	*Ingredient
+	Amount string `json:"amount"`
+	Unit   string `json:"unit"`
+}

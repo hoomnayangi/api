@@ -19,5 +19,10 @@ func NewStore() Store {
 func (s ingredientPGStore) Search(c echo.Context, key string) ([]*model.Ingredient, error) {
 	tx := db.GetTxFromCtx(c)
 	var res []*model.Ingredient
-	return res, tx.Where(fmt.Sprintf("lower(name) like lower('%%%%%s%%%%') and is_hidden <> true", key)).Limit(7).Find(&res).Error
+	return res, tx.
+		Where(fmt.Sprintf("lower(name) like lower('%%%%%s%%%%') and is_hidden <> true", key)).
+		Order("NULLIF(picture, '') DESC NULLS LAST").
+		Limit(7).
+		Find(&res).
+		Error
 }
