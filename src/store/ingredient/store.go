@@ -8,5 +8,5 @@ import (
 
 // Store - ingredient store interface
 type Store interface {
-	Get(c echo.Context, id int) (*model.Ingredient, error)
+	Search(c echo.Context, key string) ([]*model.Ingredient, error)
 }

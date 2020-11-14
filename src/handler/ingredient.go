@@ -2,17 +2,20 @@ package handler
 
 import (
 	"github.com/labstack/echo"
+
+	"github.com/hoomnayangi/api/src/handler/ingredient"
 )
 
 func ingredientRoutes(r *echo.Echo) {
 	g := r.Group("/ingredient")
 	{
-		g.GET("", getIngredients)
+		g.GET("", searchIngredients)
 	}
 }
 
-func getIngredients(c echo.Context) error {
-	ingredients, err := ingredient.GetIngredients(c)
+func searchIngredients(c echo.Context) error {
+	key := c.QueryParam("key")
+	ingredients, err := ingredient.SearchIngredients(c, key)
 	if err != nil {
 		return err
 	}

@@ -1,6 +1,8 @@
 package ingredient
 
 import (
+	"fmt"
+
 	"github.com/labstack/echo"
 	"github.com/phuwn/tools/db"
 
@@ -14,8 +16,8 @@ func NewStore() Store {
 	return &ingredientPGStore{}
 }
 
-func (s ingredientPGStore) Get(c echo.Context, id int) (*model.Ingredient, error) {
+func (s ingredientPGStore) Search(c echo.Context, key string) ([]*model.Ingredient, error) {
 	tx := db.GetTxFromCtx(c)
-	var res model.Ingredient
-	return &res, tx.Where("id = ?", id).First(&res).Error
+	var res []*model.Ingredient
+	return res, tx.Where("name like ?", fmt.Sprintf("%%%s%%", key)).Limit(7).Find(&res).Error
 }

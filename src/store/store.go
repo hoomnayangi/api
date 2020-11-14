@@ -10,6 +10,6 @@ type Store struct {
 // New - create new store variable
 func New() *Store {
 	return &Store{
-		ingredient.NewStore()
+		ingredient.NewStore(),
 	}
 }
