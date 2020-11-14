@@ -18,6 +18,7 @@ func (s recipePGStore) GetFromIngredients(c echo.Context, ingredients []string) 
 	var res []*model.Recipe
 	return res, tx.
 		Joins("inner join recipes_ingredients on recipes_ingredients.recipe_id = recipes.id").
+		// Preload("")
 		Where("recipes_ingredients.ingredient_id in (?)", ingredients).
 		Find(&res).
 		Error
