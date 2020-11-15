@@ -1,17 +1,20 @@
 package store
 
 import (
-	"github.com/hoomnayangi/api/src/store/user"
+	"github.com/hoomnayangi/api/src/store/ingredient"
+	"github.com/hoomnayangi/api/src/store/recipe"
 )
 
 // Store - server store struct
 type Store struct {
-	User user.Store
+	Ingredient ingredient.Store
+	Recipe     recipe.Store
 }
 
 // New - create new store variable
 func New() *Store {
 	return &Store{
-		User: user.NewStore(),
+		ingredient.NewStore(),
+		recipe.NewStore(),
 	}
 }

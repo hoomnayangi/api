@@ -17,6 +17,7 @@ create table recipes (
 	deleted_at timestamp(6) with time zone,
 	name varchar(200) not null,
 	description text,
+	picture text,
 	steps jsonb
 );
 
@@ -26,7 +27,8 @@ create table ingredients (
 	updated_at timestamp(6) with time zone,
 	deleted_at timestamp(6) with time zone,
 	name varchar(200) not null,
-	description text
+	description text,
+	picture text
 );
 
 create table recipes_ingredients (
@@ -45,8 +47,7 @@ create table vendors (
 	name varchar(200) not null,
 	lat float,
 	long float,
-	district varchar(20),
-	ward varchar(20)
+	address text
 );
 
 create table vendors_ingredients (
@@ -85,6 +86,17 @@ create table kitchens (
 	description text
 );
 
+-- +migrate StatementBegin
+CREATE OR REPLACE FUNCTION distance(lat1 FLOAT, lon1 FLOAT, lat2 FLOAT, lon2 FLOAT) RETURNS FLOAT AS $$
+DECLARE                                                   
+    x float = 69.1 * (lat2 - lat1);                           
+    y float = 69.1 * (lon2 - lon1) * cos(lat1 / 57.3);        
+BEGIN                                                     
+    RETURN sqrt(x * x + y * y);                               
+END  
+$$ LANGUAGE plpgsql;
+-- +migrate StatementEnd
+
 -- +migrate Down
 drop table kitchens;
 drop table orders_recipes;
@@ -95,3 +107,4 @@ drop table recipes_ingredients;
 drop table ingredients;
 drop table recipes;
 drop table users;
+drop function distance;
