@@ -16,7 +16,7 @@ seed-db-local:
 	@docker exec -t $(POSTGRES_CONTAINER) sh -c "chmod +x seed.sh;./seed.sh"
 
 init: remove-infras
-	@docker-compose  up -d 
+	@docker-compose  up -d db
 	@echo "Waiting for database connection..."
 	@while ! docker exec $(POSTGRES_CONTAINER) pg_isready -h localhost -p 5432 > /dev/null; do \
 		sleep 1; \

@@ -1,4 +1,4 @@
 local:
   dialect: postgres
-  datasource: user=admin password=password host=127.0.0.1 port=15432 dbname=hoomnayangi sslmode=disable
+  datasource: user=admin password=password host=127.0.0.1 port=5432 dbname=hoomnayangi sslmode=disable
   dir: data/migration
